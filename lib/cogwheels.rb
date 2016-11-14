@@ -30,4 +30,10 @@ require 'cogwheels/version'
 module Cogwheels
   autoload :Configuration, 'cogwheels/configuration'
   autoload :Loader, 'cogwheels/loader'
+
+  module_function
+
+  def load(src, mutable = true)
+    Cogwheels::Loader.load(src, mutable)
+  end
 end
