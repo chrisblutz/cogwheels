@@ -15,7 +15,7 @@ module Cogwheels
         hash = {}
         if File.exist?(file)
           yaml = IO.read(file)
-          hash = safe_load(yaml, file.path)
+          hash = safe_load(yaml, File.path(file))
         end
         hash
       end

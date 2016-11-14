@@ -24,5 +24,13 @@ A modification was attempted on an immutable Configuration instance.
       end
       @hash[key] = value if @mutable
     end
+
+    def to_s
+      @hash.to_s
+    end
+
+    def inspect
+      "Cogwheels::Configuration =>\n#{@hash}"
+    end
   end
 end
