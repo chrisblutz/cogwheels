@@ -1,10 +1,17 @@
 require 'yaml'
 require 'safe_yaml'
 
+require 'cogwheels/configuration'
+
 module Cogwheels
+  # This module helps in loading YAML configurations from different source types
   module Loader
     class << self
-      def load_from_file(file)
+      def load(src, mutable = true)
+        return Configuration.new(from_file(src), mutable) if File.file?(src)
+      end
+
+      def from_file(file)
         hash = {}
         if File.exist?(file)
           yaml = IO.read(file)

@@ -1,6 +1,10 @@
+$LOAD_PATH.unshift(File.expand_path('../lib', __FILE__))
+
+require 'cogwheels/version'
+
 Gem::Specification.new do |s|
   s.name        = 'cogwheels'
-  s.version     = '0.1.0'
+  s.version     = Cogwheels.VERSION
   s.license     = 'MIT'
   s.authors     = ['Christopher Lutz']
   s.email       = ['lutzblox@gmail.com']

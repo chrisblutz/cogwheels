@@ -1,4 +1,5 @@
 module Cogwheels
+  # This class contains configuration information loaded from YAML sources
   class Configuration
     class ImmutableConfigurationError < StandardError
     end
