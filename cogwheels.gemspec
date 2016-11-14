@@ -9,6 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Christopher Lutz']
   s.email       = ['lutzblox@gmail.com']
 
+  s.required_ruby_version = '>= 1.9'
+
   s.files = `git ls-files bin lib LICENSE.txt README.md`.split($RS)
 
   s.summary = 'A Ruby configuration-loading library'
