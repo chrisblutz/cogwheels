@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/cogwheels.svg)](http://badge.fury.io/rb/cogwheels)
 [![Dependency Status](https://gemnasium.com/badges/github.com/chrisblutz/cogwheels.svg)](https://gemnasium.com/github.com/chrisblutz/cogwheels)
 [![Linux Build Status](https://travis-ci.org/chrisblutz/cogwheels.svg?branch=master)](https://travis-ci.org/chrisblutz/cogwheels)
 [![Inline docs](http://inch-ci.org/github/chrisblutz/cogwheels.svg?branch=master)](http://inch-ci.org/github/chrisblutz/cogwheels)
