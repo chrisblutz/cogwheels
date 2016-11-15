@@ -6,3 +6,17 @@
 [![Code Climate](https://codeclimate.com/github/chrisblutz/cogwheels/badges/gpa.svg)](https://codeclimate.com/github/chrisblutz/cogwheels)
 # Cogwheels
 **Cogwheels** is a work-in-progress configuration-loading library for Ruby.
+
+## Installation
+To install, use the standard RubyGems syntax:
+```sh
+$ gem install cogwheels
+```
+Or if necessary, you can add it to your `Gemfile`:
+```rb
+gem 'cogwheels'
+```
+As **Cogwheels** is not yet at version `1.0`, it is recommended to use version locking:
+```rb
+gem 'cogwheels', '~> 0.1'
+```
