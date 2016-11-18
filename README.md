@@ -20,3 +20,31 @@ As **Cogwheels** is not yet at version `1.0`, it is recommended to use version l
 ```rb
 gem 'cogwheels', '~> 0.1'
 ```
+
+## Usage
+
+Assuming you have already installed the `cogwheels` gem or added it to your `Gemfile`, the first step
+is to require it:
+```rb
+require 'cogwheels'
+```
+You can load the configuration file into a `Cogwheels::Configuration` object using the following:
+```rb
+config = Cogwheels.load('.../file.yml')
+```
+This `config` object uses methods similar to those in a `Hash` object:
+```rb
+config[:key] # Retrieves the value for a key
+
+config.key?(:key) # Checks if a value exists for a key
+
+config[:key] = 'value' # Sets the value for a key
+```
+However, the basic retrieval method (`config[:key]`) also takes a default value as an optional parameter:
+```rb
+config[:key, 'default'] # Retrieves the value for a key, specifying a default value
+```
+
+## Copyright
+
+Copyright (c) 2016 Christopher Lutz.  See [LICENSE.txt](LICENSE.txt) for further details.
