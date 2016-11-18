@@ -2,6 +2,7 @@ Metrics/AbcSize:
   Enabled: False
   Max: 25
 Metrics/BlockLength:
+  Enabled: False
   Max: 30
 Metrics/ClassLength:
   Max: 150
@@ -15,4 +16,4 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 8
 EndOfLine:
-  Enabled: false
+  Enabled: False

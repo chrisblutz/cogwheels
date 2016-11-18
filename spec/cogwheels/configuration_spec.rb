@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/BlockLength
 RSpec.describe Cogwheels::Configuration do
   context 'when key exists' do
     it 'returns the correct value' do
