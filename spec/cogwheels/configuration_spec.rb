@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 RSpec.describe Cogwheels::Configuration do
   context 'when key exists' do
     it 'returns the correct value' do
@@ -12,6 +13,14 @@ RSpec.describe Cogwheels::Configuration do
       config = Cogwheels::Configuration.new({})
 
       expect(config[:test]).to eq(nil)
+    end
+  end
+
+  context 'when a default value is given and value does not exist' do
+    it 'returns the default value' do
+      config = Cogwheels::Configuration.new({})
+
+      expect(config[:test, 'default']).to eq('default')
     end
   end
 

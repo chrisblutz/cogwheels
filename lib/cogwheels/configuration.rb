@@ -11,8 +11,8 @@ module Cogwheels
       @mutable = mutable
     end
 
-    def [](key)
-      @hash[key]
+    def [](key, default = nil)
+      @hash[key] ||= default
     end
 
     def []=(key, value)
@@ -23,6 +23,10 @@ A modification was attempted on an immutable Configuration instance.
         raise ImmutableConfigurationError, error
       end
       @hash[key] = value if @mutable
+    end
+
+    def key?(key)
+      @hash.key?(key)
     end
 
     def to_s
