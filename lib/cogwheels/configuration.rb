@@ -7,7 +7,15 @@ module Cogwheels
     attr_reader :mutable
 
     def initialize(hash, mutable = true)
-      @hash = hash
+      @hash = {}
+      hash.each do |key, value|
+        if value.is_a?(Hash)
+          value_config = Configuration.new(value, mutable)
+          @hash[key] = value_config
+        else
+          @hash[key] = value
+        end
+      end
       @mutable = mutable
     end
 
@@ -29,12 +37,22 @@ A modification was attempted on an immutable Configuration instance.
       @hash.key?(key)
     end
 
+    def keys
+      @hash.keys
+    end
+
+    attr_reader :hash
+
     def to_s
       @hash.to_s
     end
 
     def inspect
-      "Cogwheels::Configuration =>\n#{@hash}"
+      "Cogwheels::Configuration (mutable: #{mutable}) =>\n#{@hash}"
+    end
+
+    def ==(other)
+      hash == other.hash && mutable == other.mutable
     end
   end
 end

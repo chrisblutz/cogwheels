@@ -23,6 +23,14 @@ RSpec.describe Cogwheels::Configuration do
     end
   end
 
+  context 'when a configuration contains a hash' do
+    it 'is converted to a configuration instance' do
+      config = Cogwheels::Configuration.new(hash: { test: 'value' }, value: 10)
+
+      expect(config[:hash].class).to eq(Cogwheels::Configuration)
+    end
+  end
+
   context 'when configuration is mutable' do
     it 'allows changes' do
       config = Cogwheels::Configuration.new(test: 'value')
