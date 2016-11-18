@@ -4,10 +4,13 @@
 [![Inline docs](http://inch-ci.org/github/chrisblutz/cogwheels.svg?branch=master)](http://inch-ci.org/github/chrisblutz/cogwheels)
 [![Test Coverage](https://codeclimate.com/github/chrisblutz/cogwheels/badges/coverage.svg)](https://codeclimate.com/github/chrisblutz/cogwheels/coverage)
 [![Code Climate](https://codeclimate.com/github/chrisblutz/cogwheels/badges/gpa.svg)](https://codeclimate.com/github/chrisblutz/cogwheels)
+
 # Cogwheels
+
 **Cogwheels** is a work-in-progress configuration-loading library for Ruby.
 
 ## Installation
+
 To install, use the standard RubyGems syntax:
 ```sh
 $ gem install cogwheels
@@ -44,6 +47,16 @@ However, the basic retrieval method (`config[:key]`) also takes a default value 
 ```rb
 config[:key, 'default'] # Retrieves the value for a key, specifying a default value
 ```
+If for any reason you need the original `Hash` object, you can call `config.hash` to retrieve it.
+
+### Mutability
+
+By default, `Configuration` instances are *mutable*, which means their values can be altered at any time.  However, you can lock
+editing on a configuration tree by passing a second parameter to the `load` method:
+```rb
+config = Cogwheels.load('.../file.yml', false)
+```
+Now, whenever an edit is attempted (such as `config[:key] = 'value'`), an `ImmutableConfigurationError` will be raised.
 
 ## Copyright
 
