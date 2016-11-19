@@ -51,12 +51,26 @@ If for any reason you need the original `Hash` object, you can call `config.hash
 
 ### Mutability
 
-By default, `Configuration` instances are *mutable*, which means their values can be altered at any time.  However, you can lock
-editing on a configuration tree by passing a second parameter to the `load` method:
+By default, `Configuration` instances are *mutable*, which means their values can be altered at any time.  However, you can lock editing on a configuration tree by passing a second parameter to the `load` method:
 ```rb
 config = Cogwheels.load('.../file.yml', false)
 ```
 Now, whenever an edit is attempted (such as `config[:key] = 'value'`), an `ImmutableConfigurationError` will be raised.
+
+### Symbols As Keys
+
+If needed, `Configuration` objects can be forced to convert *all* of their keys to symbols:
+```rb
+config.to_symbol_keys
+```
+So if this file is passed in:
+```yml
+Test: value
+```
+the value can be retrieved using:
+```rb
+config[:Test]
+```
 
 ## Copyright
 
