@@ -7,7 +7,7 @@
 
 # Cogwheels
 
-**Cogwheels** is a work-in-progress configuration-loading library for Ruby.
+**Cogwheels** is a lightweight configuration-loading library for Ruby.
 
 ## Installation
 
@@ -21,7 +21,7 @@ gem 'cogwheels'
 ```
 As **Cogwheels** is not yet at version `1.0`, it is recommended to use version locking:
 ```rb
-gem 'cogwheels', '~> 0.1'
+gem 'cogwheels', '~> 0.2'
 ```
 
 ## Usage
