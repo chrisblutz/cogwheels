@@ -54,4 +54,13 @@ RSpec.describe Cogwheels::Configuration do
       end.to raise_error(Cogwheels::Configuration::ImmutableConfigurationError)
     end
   end
+
+  describe '#to_symbol_keys' do
+    it 'converts all keys to symbols' do
+      config = Cogwheels::Configuration.new('test' => 'value', 'test_hash' => { 'test2' => 'value2' }).to_symbol_keys
+
+      expect(config[:test]).to eq('value')
+      expect(config[:test_hash][:test2]).to eq('value2')
+    end
+  end
 end

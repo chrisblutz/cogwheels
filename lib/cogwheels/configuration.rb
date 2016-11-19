@@ -43,6 +43,20 @@ A modification was attempted on an immutable Configuration instance.
 
     attr_reader :hash
 
+    def to_symbol_keys
+      @new_hash = {}
+      @hash.each do |key, value|
+        key = key.to_sym
+        @new_hash[key] = if value.is_a?(Cogwheels::Configuration)
+                           value.to_symbol_keys
+                         else
+                           value
+                         end
+      end
+      @hash = @new_hash
+      self
+    end
+
     def to_s
       @hash.to_s
     end
