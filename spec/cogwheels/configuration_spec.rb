@@ -63,4 +63,14 @@ RSpec.describe Cogwheels::Configuration do
       expect(config[:test_hash][:test2]).to eq('value2')
     end
   end
+
+  context 'when configuration is immutable and #to_symbol_keys is called' do
+    it 'does not allow changes and raises ImmutableConfigurationError' do
+      config = Cogwheels::Configuration.new({ 'test' => 'value' }, false)
+
+      expect do
+        config.to_symbol_keys
+      end.to raise_error(Cogwheels::Configuration::ImmutableConfigurationError)
+    end
+  end
 end

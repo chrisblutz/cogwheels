@@ -24,13 +24,11 @@ module Cogwheels
     end
 
     def []=(key, value)
-      unless @mutable
-        error = <<-EOF
-A modification was attempted on an immutable Configuration instance.
-      EOF
-        raise ImmutableConfigurationError, error
+      if @mutable
+        @hash[key] = value
+      else
+        raise_immutable_configuration_error
       end
-      @hash[key] = value if @mutable
     end
 
     def key?(key)
@@ -44,16 +42,20 @@ A modification was attempted on an immutable Configuration instance.
     attr_reader :hash
 
     def to_symbol_keys
-      @new_hash = {}
-      @hash.each do |key, value|
-        key = key.to_sym
-        @new_hash[key] = if value.is_a?(Cogwheels::Configuration)
-                           value.to_symbol_keys
-                         else
-                           value
-                         end
+      if @mutable
+        @new_hash = {}
+        @hash.each do |key, value|
+          key = key.to_sym
+          @new_hash[key] = if value.is_a?(Cogwheels::Configuration)
+                             value.to_symbol_keys
+                           else
+                             value
+                           end
+        end
+        @hash = @new_hash
+      else
+        raise_immutable_configuration_error
       end
-      @hash = @new_hash
       self
     end
 
@@ -67,6 +69,15 @@ A modification was attempted on an immutable Configuration instance.
 
     def ==(other)
       hash == other.hash && mutable == other.mutable
+    end
+
+    private
+
+    def raise_immutable_configuration_error
+      error = <<-EOF
+A modification was attempted on an immutable Configuration instance.
+      EOF
+      raise ImmutableConfigurationError, error
     end
   end
 end
