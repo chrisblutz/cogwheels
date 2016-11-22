@@ -17,6 +17,7 @@ module Cogwheels
         end
       end
       @mutable = mutable
+      @hash.freeze unless @mutable
     end
 
     def [](key, default = nil)

@@ -55,6 +55,16 @@ RSpec.describe Cogwheels::Configuration do
     end
   end
 
+  context 'when configuration is immutable and its internal hash is modified' do
+    it 'does not allow changes and raises a TypeError' do
+      config = Cogwheels::Configuration.new({ test: 'value' }, false)
+
+      expect do
+        config.hash[:test] = 'new_value'
+      end.to raise_error(RuntimeError)
+    end
+  end
+
   describe '#to_symbol_keys' do
     it 'converts all keys to symbols' do
       config = Cogwheels::Configuration.new('test' => 'value', 'test_hash' => { 'test2' => 'value2' }).to_symbol_keys
