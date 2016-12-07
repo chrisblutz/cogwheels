@@ -17,3 +17,5 @@ Metrics/PerceivedComplexity:
   Max: 8
 EndOfLine:
   Enabled: False
+Bundle/OrderedGems:
+  Enabled: False
