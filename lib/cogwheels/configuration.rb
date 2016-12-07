@@ -43,39 +43,40 @@ module Cogwheels
     attr_reader :hash
 
     def symbolize_keys
-      if @mutable
-        @new_hash = {}
-        @hash.each do |key, value|
-          key = key.to_sym
-          @new_hash[key] = if value.is_a?(Cogwheels::Configuration)
-                             value.symbolize_keys
-                           else
-                             value
-                           end
-        end
-        @hash = @new_hash
-      else
-        raise_immutable_configuration_error
+      act_on_keys do |key, value|
+        key = key.to_sym
+        @new_hash[key] = if value.is_a?(Cogwheels::Configuration)
+                           value.symbolize_keys
+                         else
+                           value
+                         end
       end
       self
     end
 
     def stringify_keys
+      act_on_keys do |key, value|
+        key = key.to_s
+        @new_hash[key] = if value.is_a?(Cogwheels::Configuration)
+                           value.stringify_keys
+                         else
+                           value
+                         end
+      end
+      self
+      self
+    end
+
+    def act_on_keys
       if @mutable
         @new_hash = {}
         @hash.each do |key, value|
-          key = key.to_s
-          @new_hash[key] = if value.is_a?(Cogwheels::Configuration)
-                             value.stringify_keys
-                           else
-                             value
-                           end
+          yield(key, value)
         end
         @hash = @new_hash
       else
         raise_immutable_configuration_error
       end
-      self
     end
 
     def to_s
