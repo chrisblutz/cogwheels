@@ -57,11 +57,11 @@ config = Cogwheels.load('.../file.yml', false)
 ```
 Now, whenever an edit is attempted (such as `config[:key] = 'value'`), an `ImmutableConfigurationError` will be raised.
 
-### Symbols As Keys
+### Symbols As Keys, or Strings As Keys
 
 If needed, `Configuration` objects can be forced to convert *all* of their keys to symbols:
 ```rb
-config.to_symbol_keys
+config.symbolize_keys
 ```
 So if this file is passed in:
 ```yml
@@ -70,6 +70,10 @@ Test: value
 the value can be retrieved using:
 ```rb
 config[:Test]
+```
+On the other hand, objects can also be forced to convert all of their keys to strings:
+```rb
+config.stringify_keys
 ```
 
 ## Copyright
