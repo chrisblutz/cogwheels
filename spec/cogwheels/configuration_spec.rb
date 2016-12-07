@@ -65,21 +65,40 @@ RSpec.describe Cogwheels::Configuration do
     end
   end
 
-  describe '#to_symbol_keys' do
+  describe '#symbolize_keys' do
     it 'converts all keys to symbols' do
-      config = Cogwheels::Configuration.new('test' => 'value', 'test_hash' => { 'test2' => 'value2' }).to_symbol_keys
+      config = Cogwheels::Configuration.new('test' => 'value', 'test_hash' => { 'test2' => 'value2' }).symbolize_keys
 
       expect(config[:test]).to eq('value')
       expect(config[:test_hash][:test2]).to eq('value2')
     end
   end
 
-  context 'when configuration is immutable and #to_symbol_keys is called' do
+  describe '#stringify_keys' do
+    it 'converts all keys to symbols' do
+      config = Cogwheels::Configuration.new(test: 'value', test_hash: { test2: 'value2' }).stringify_keys
+
+      expect(config['test']).to eq('value')
+      expect(config['test_hash']['test2']).to eq('value2')
+    end
+  end
+
+  context 'when configuration is immutable and #symbolize_keys is called' do
     it 'does not allow changes and raises ImmutableConfigurationError' do
       config = Cogwheels::Configuration.new({ 'test' => 'value' }, false)
 
       expect do
-        config.to_symbol_keys
+        config.symbolize_keys
+      end.to raise_error(Cogwheels::Configuration::ImmutableConfigurationError)
+    end
+  end
+
+  context 'when configuration is immutable and #stringify_keys is called' do
+    it 'does not allow changes and raises ImmutableConfigurationError' do
+      config = Cogwheels::Configuration.new({ 'test' => 'value' }, false)
+
+      expect do
+        config.stringify_keys
       end.to raise_error(Cogwheels::Configuration::ImmutableConfigurationError)
     end
   end

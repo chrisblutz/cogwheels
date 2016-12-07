@@ -42,13 +42,31 @@ module Cogwheels
 
     attr_reader :hash
 
-    def to_symbol_keys
+    def symbolize_keys
       if @mutable
         @new_hash = {}
         @hash.each do |key, value|
           key = key.to_sym
           @new_hash[key] = if value.is_a?(Cogwheels::Configuration)
-                             value.to_symbol_keys
+                             value.symbolize_keys
+                           else
+                             value
+                           end
+        end
+        @hash = @new_hash
+      else
+        raise_immutable_configuration_error
+      end
+      self
+    end
+
+    def stringify_keys
+      if @mutable
+        @new_hash = {}
+        @hash.each do |key, value|
+          key = key.to_s
+          @new_hash[key] = if value.is_a?(Cogwheels::Configuration)
+                             value.stringify_keys
                            else
                              value
                            end
