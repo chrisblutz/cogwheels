@@ -40,7 +40,9 @@ module Cogwheels
       @hash.keys
     end
 
-    attr_reader :hash
+    def internal_hash
+      @hash
+    end
 
     def symbolize_keys
       act_on_keys do |key, value|
@@ -77,6 +79,22 @@ module Cogwheels
       else
         raise_immutable_configuration_error
       end
+    end
+
+    def write(file)
+      Cogwheels::Writer.write(self, file)
+    end
+
+    def hash
+      new_hash = {}
+      @hash.each do |key, value|
+        new_hash[key] = if value.is_a?(Cogwheels::Configuration)
+                          value.hash
+                        else
+                          value
+                        end
+      end
+      new_hash
     end
 
     def to_s

@@ -30,6 +30,7 @@ require 'cogwheels/version'
 module Cogwheels
   autoload :Configuration, 'cogwheels/configuration'
   autoload :Loader, 'cogwheels/loader'
+  autoload :Writer, 'cogwheels/writer'
 
   module_function
 

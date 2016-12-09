@@ -60,7 +60,7 @@ RSpec.describe Cogwheels::Configuration do
       config = Cogwheels::Configuration.new({ test: 'value' }, false)
 
       expect do
-        config.hash[:test] = 'new_value'
+        config.internal_hash[:test] = 'new_value'
       end.to raise_error(RuntimeError)
     end
   end
