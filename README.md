@@ -47,7 +47,23 @@ However, the basic retrieval method (`config[:key]`) also takes a default value 
 ```rb
 config[:key, 'default'] # Retrieves the value for a key, specifying a default value
 ```
-If for any reason you need the original `Hash` object, you can call `config.hash` to retrieve it.
+
+### Internal Hashes
+
+`Configuration` instances use hashes to store data.  These hashes can be retrieved as-is (with sub-items inside remaining as `Configuration` objects) by calling `config.internal_hash`.  However, a more useful hash (with all `Configuration` sub-items also converted to hashes) can be retrieved by calling `config.hash`.
+
+Take the following file, for example:
+```yml
+Test: value
+Test2:
+  Test3: yet another value
+```
+```rb
+config.internal_hash # => {"Test"=>"value", "Test2"=>Cogwheels::Configuration (mutable: true)=> {"Test3"=>"yet another value"}}
+
+config.hash          # => {"Test"=>"value", "Test2"=>{"Test3"=>"yet another value"}}
+```
+
 
 ### Mutability
 
@@ -74,6 +90,13 @@ config[:Test]
 On the other hand, objects can also be forced to convert all of their keys to strings:
 ```rb
 config.stringify_keys
+```
+
+### Writing Configurations to Files
+
+`Configuration` instances can also be written to files, by using their `write` method:
+```rb
+config.write('.../file.yml')
 ```
 
 ## Copyright
