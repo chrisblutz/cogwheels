@@ -1,4 +1,4 @@
-## Uncommitted (`master` branch)
+## Unreleased (`master` branch)
 - Add `Configuration#stringify_keys`
 - Add `Writer` module to write `Configuration` instances to files
 - Add recursive method to retrieve internal hashes (replaces Configuration sub-items with hashes) as new `Configuration#hash`
